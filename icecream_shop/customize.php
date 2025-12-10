@@ -34,7 +34,7 @@ if (!$flavor) {
         <h4>Ice Cream ni Iska</h4>
     </div>
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.php">Home</a>
         <a href="menu.php">Menu</a>
         <a href="cart.php">Order</a>
     </nav>
@@ -43,7 +43,7 @@ if (!$flavor) {
 <section class="hero">
     <div class="hero-content">
         <h1>Customize Your Ice Cream</h1>
-        <img src="/mnt/data/874478b3-b336-4caf-b324-71893bf45d1a.png" alt="Fox" class="big-logo">
+        <img src="images/logo.jpg" alt="Logo" class="big-logo">
     </div>
 </section>
 
