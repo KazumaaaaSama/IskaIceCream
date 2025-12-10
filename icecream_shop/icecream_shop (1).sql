@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2025 at 11:18 AM
+-- Generation Time: Dec 10, 2025 at 06:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -111,6 +111,29 @@ CREATE TABLE `order_items` (
 INSERT INTO `order_items` (`id`, `order_id`, `flavor_id`, `flavor_name`, `unit_price`, `quantity`, `toppings_json`, `line_subtotal`) VALUES
 (1, 1, 3, 'Coffee', 35.00, 2, '[{\"id\":1,\"name\":\"Sprinkles\",\"price\":5},{\"id\":5,\"name\":\"Caramel Drizzle\",\"price\":12}]', 104.00);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `toppings`
+--
+
+CREATE TABLE `toppings` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` decimal(6,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `toppings`
+--
+
+INSERT INTO `toppings` (`id`, `name`, `price`) VALUES
+(1, 'Sprinkles', 5.00),
+(2, 'Chocolate Chips', 10.00),
+(3, 'Oreo Bits', 15.00),
+(4, 'Marshmallows', 8.00),
+(5, 'Caramel Drizzle', 12.00);
+
 --
 -- Indexes for dumped tables
 --
@@ -135,6 +158,12 @@ ALTER TABLE `order_items`
   ADD KEY `order_id` (`order_id`);
 
 --
+-- Indexes for table `toppings`
+--
+ALTER TABLE `toppings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -155,6 +184,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `toppings`
+--
+ALTER TABLE `toppings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
