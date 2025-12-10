@@ -1,10 +1,15 @@
 <?php
-// List of available toppings (fixed)
-$toppings = [
-    ["id" => 1, "name" => "Sprinkles", "price" => 5],
-    ["id" => 2, "name" => "Chocolate Chips", "price" => 10],
-    ["id" => 3, "name" => "Oreo Bits", "price" => 15],
-    ["id" => 4, "name" => "Marshmallows", "price" => 8],
-    ["id" => 5, "name" => "Caramel Drizzle", "price" => 12],
-];
+// toppings.php
+// This file is now used to fetch all available toppings from the database.
+require_once 'db_connect.php';
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM toppings ORDER BY name ASC");
+    $stmt->execute();
+    $toppings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    
+    $toppings = []; 
+    
+}
 ?>
