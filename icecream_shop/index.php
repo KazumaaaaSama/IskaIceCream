@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connect.php';
+require_once 'db_connect.php'; // This now provides $pdo
 session_start();
 
 // Handle login
@@ -7,13 +7,16 @@ if (isset($_POST['loginSubmit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Prepare statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Prepare statement to prevent SQL injection - NOW USING PDO ($pdo)
+    $stmt = $pdo->prepare("SELECT * FROM admin WHERE username = ? AND password = ?");
+    
+    // PDO execute with array replaces bind_param and execute()
+    $stmt->execute([$username, $password]); 
+    
+    // PDO fetch
+    $admin_user = $stmt->fetch(PDO::FETCH_ASSOC); 
 
-    if ($result->num_rows === 1) {
+    if ($admin_user) {
         // Login successful
         $_SESSION['admin_user'] = $username;
         header("Location: admin.php");
@@ -105,12 +108,10 @@ if (isset($_POST['loginSubmit'])) {
         <a href="menu.php">Menu</a>
         <a href="cart.php">Order</a>
 
-        <!-- LOGIN ICON -->
-        <img src="images/login.png" alt="Login" class="login-icon" id="loginBtn">
+        <img src="images/icons/user.png" alt="Login" class="login-icon" id="loginBtn">
     </nav>
 </header>
 
-<!-- POPUP OVERLAY -->
 <div class="popup-overlay" id="popupOverlay">
     <div class="login-popup">
         <h2>Login</h2>
@@ -135,23 +136,22 @@ if (isset($_POST['loginSubmit'])) {
     <h1>Welcome to Ice Cream ni Iska!</h1>
     <p class="subtitle">Crafting premium scoops and flavors perfect for every mood.</p>
 
-    <!-- Quick Navigation -->
     <div class="quick-nav">
-        <h2>🍦 Quick Navigation</h2>
+        <h2>📌 Quick Navigation</h2>
 
-        <a href="menu.php">🍨 Menu</a>
+        <a href="menu.php">🍦 Menu</a>
         <p>View all our ice cream flavors.</p>
 
-        <a href="customize.php">🧁 Customize</a>
+        <a href="customize.php">🎨 Customize</a>
         <p>Create your own cup or cone.</p>
 
-        <a href="toppings.php">🔮 Toppings</a>
+        <a href="toppings.php">🍒 Toppings</a>
         <p>Select delicious toppings.</p>
 
         <a href="cart.php">🛒 Cart</a>
         <p>Review your order.</p>
 
-        <a href="checkout.php">💳 Checkout</a>
+        <a href="checkout.php">✅ Checkout</a>
         <p>Complete your purchase.</p>
     </div>
 </div>
@@ -176,6 +176,11 @@ if (isset($_POST['loginSubmit'])) {
     popupOverlay.addEventListener("click", (e) => {
         if (e.target === popupOverlay) popupOverlay.style.display = "none";
     });
+
+    // PHP trick to show the popup on failed login attempt
+    <?php if(isset($login_error)): ?>
+        popupOverlay.style.display = "flex";
+    <?php endif; ?>
 </script>
 
 </body>
