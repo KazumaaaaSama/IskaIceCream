@@ -21,7 +21,7 @@ foreach ($cart as $c) {
         <h4>Ice Cream ni Iska</h4>
     </div>
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.php">Home</a>
         <a href="menu.php">Menu</a>
         <a href="cart.php" class="active">Order</a>
     </nav>
@@ -30,7 +30,7 @@ foreach ($cart as $c) {
 <section class="hero">
     <div class="hero-content">
         <h1>Your Order</h1>
-        <img src="/mnt/data/1f501d3a-5f79-4936-877b-f3a7f41d814e.png" alt="Logo" class="big-logo">
+        <img src="images/logo.jpg" alt="Logo" class="big-logo">
     </div>
 </section>
 

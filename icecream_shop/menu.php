@@ -24,7 +24,7 @@ $flavors = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h4>Ice Cream ni Iska</h4>
         </div>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
             <a href="menu.php" class="active">Menu</a>
             <a href="cart.php">Order</a>
         </nav>
